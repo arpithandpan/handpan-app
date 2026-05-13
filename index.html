@@ -1,173 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Handpan with Arpit</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background: #000;
-      color: #fff;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      padding: 24px;
-    }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: #888;
-      margin-bottom: 28px;
-    }
-
-    .hero-card {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 24px;
-      padding: 24px;
-      margin-bottom: 24px;
-    }
-
-    .hero-title {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .hero-value {
-      font-size: 42px;
-      font-weight: bold;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-
-    .stat-card {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 20px;
-      padding: 20px;
-    }
-
-    .stat-label {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .loading-wrap,
-    .empty-state {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 300px;
-      flex-direction: column;
-      gap: 12px;
-      color: #888;
-    }
-
-    .spinner {
-      width: 42px;
-      height: 42px;
-      border: 4px solid #222;
-      border-top: 4px solid #00ff88;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    .empty-icon {
-      font-size: 48px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <h1>Handpan with Arpit</h1>
-  <div class="subtitle">Workshop Dashboard</div>
-
-  <div id="home-body"></div>
-
-  <script>
-
-    const API = 'https://script.google.com/macros/s/AKfycbwletZ9uKrixub98OUhPlVGalfVbiy3CYA_SWNXg5Wa2GfGhYCpvktM-QAIsG4oQzm45w/exec';
-
-    async function api(action) {
-
-      const response = await fetch(API + '?action=' + action);
-
-      if (!response.ok) {
-        throw new Error('API request failed');
-      }
-
-      return await response.json();
-    }
-
-    async function loadHome() {
-
-      const body = document.getElementById('home-body');
-
-      body.innerHTML = `
-        <div class="loading-wrap">
-          <div class="spinner"></div>
-          <div>Loading dashboard...</div>
-        </div>
-      `;
+    async function loadDashboard() {
 
       try {
 
-        const data = await api('getDashboard');
+        const response = await fetch(API + '?action=getDashboard');
 
-        body.innerHTML = `
+        const data = await response.json();
 
-          <div class="hero-card">
-            <div class="hero-title">Net Profit</div>
-            <div class="hero-value">₹${data.netProfit || 0}</div>
+        document.getElementById('app').innerHTML = `
+
+          <div class="card">
+            <div class="label">Net Profit</div>
+            <div class="value">₹${data.netProfit}</div>
           </div>
 
-          <div class="stats-grid">
+          <div class="grid">
 
-            <div class="stat-card">
-              <div class="stat-label">Workshops</div>
-              <div class="stat-value">${data.totalWorkshops || 0}</div>
+            <div class="card">
+              <div class="label">Workshops</div>
+              <div class="value small">${data.totalWorkshops}</div>
             </div>
 
-            <div class="stat-card">
-              <div class="stat-label">Participants</div>
-              <div class="stat-value">${data.totalParticipants || 0}</div>
+            <div class="card">
+              <div class="label">Participants</div>
+              <div class="value small">${data.totalParticipants}</div>
             </div>
 
-            <div class="stat-card">
-              <div class="stat-label">Students</div>
-              <div class="stat-value">${data.totalStudents || 0}</div>
+            <div class="card">
+              <div class="label">Students</div>
+              <div class="value small">${data.totalStudents}</div>
             </div>
 
-            <div class="stat-card">
-              <div class="stat-label">Leads</div>
-              <div class="stat-value">${data.openLeads || 0}</div>
+            <div class="card">
+              <div class="label">Leads</div>
+              <div class="value small">${data.openLeads}</div>
             </div>
 
           </div>
@@ -178,16 +44,15 @@
 
         console.error(err);
 
-        body.innerHTML = `
-          <div class="empty-state">
-            <div class="empty-icon">⚠️</div>
-            <div>Could not load data.</div>
+        document.getElementById('app').innerHTML = `
+          <div class="card">
+            Could not load data.
           </div>
         `;
       }
     }
 
-    loadHome();
+    loadDashboard();
 
   </script>
 
