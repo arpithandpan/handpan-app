@@ -9,7 +9,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Handpan">
-<link rel="apple-touch-icon" href="icon.png">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -38,7 +37,6 @@
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; overflow: hidden; }
 
-  /* PIN SCREEN */
   #pin-screen {
     position: fixed; inset: 0; background: var(--bg);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -72,12 +70,10 @@
   .pin-error { color: var(--red); font-size: 13px; margin-top: 8px; animation: shake 0.3s; }
   @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
 
-  /* MAIN APP */
   #app { height: 100%; display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; }
   .screen { display: none; flex-direction: column; flex: 1; overflow: hidden; }
   .screen.active { display: flex; }
 
-  /* TOP BAR */
   .topbar {
     padding: 14px 18px 12px; background: var(--bg);
     border-bottom: 1px solid var(--border);
@@ -100,11 +96,9 @@
     cursor: pointer; color: var(--text); font-size: 20px;
   }
 
-  /* SCROLL BODY */
   .body { flex: 1; overflow-y: auto; padding: 16px; -webkit-overflow-scrolling: touch; }
   .body::-webkit-scrollbar { display: none; }
 
-  /* NAV BAR */
   .navbar {
     display: grid; grid-template-columns: repeat(5,1fr);
     background: var(--bg); border-top: 1px solid var(--border);
@@ -120,12 +114,10 @@
   .ni.on { color: var(--green); }
   .ni svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; }
 
-  /* CARDS */
   .card {
-    background: var(--bg2); border-radius: var(--r2);
+    background: var(--bg2); border-radius: 16px;
     border: 1px solid var(--border); padding: 14px;
     margin-bottom: 10px; cursor: pointer;
-    transition: border-color 0.15s;
   }
   .card:active { border-color: var(--border2); }
   .card-static { cursor: default; }
@@ -133,187 +125,107 @@
   .card-title { font-size: 14px; font-weight: 500; color: var(--text); }
   .card-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
 
-  /* BADGES */
   .badge { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; white-space: nowrap; }
-  .bg { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
-  .ba { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
-  .br { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
-  .bb { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
-  .bgr { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+  .bg { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+  .ba { background: rgba(245,158,11,0.12); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+  .br { background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.25); }
+  .bgr { background: #242424; color: #888; border: 1px solid rgba(255,255,255,0.08); }
 
-  /* STAT GRID */
   .sgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-  .scard { background: var(--bg2); border-radius: var(--r); border: 1px solid var(--border); padding: 13px; }
-  .slabel { font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
-  .sval { font-size: 20px; font-weight: 600; color: var(--text); font-family: 'DM Mono', monospace; }
-  .sval.g { color: var(--green); }
-  .sval.a { color: var(--amber); }
-  .sval.r { color: var(--red); }
+  .scard { background: #1a1a1a; border-radius: 12px; border: 1px solid rgba(255,255,255,0.08); padding: 13px; }
+  .slabel { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
+  .sval { font-size: 20px; font-weight: 600; color: #f0f0f0; font-family: 'DM Mono', monospace; }
+  .sval.g { color: #22c55e; }
+  .sval.a { color: #f59e0b; }
 
-  /* HERO PROFIT */
   .profit-hero {
-    background: var(--green-bg); border: 1px solid var(--green-border);
-    border-radius: var(--r2); padding: 16px; margin-bottom: 14px;
+    background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 16px; padding: 16px; margin-bottom: 14px;
     display: flex; justify-content: space-between; align-items: center;
   }
-  .ph-label { font-size: 12px; color: var(--green); }
+  .ph-label { font-size: 12px; color: #22c55e; }
   .ph-sub { font-size: 11px; color: rgba(34,197,94,0.7); margin-top: 2px; }
-  .ph-val { font-size: 28px; font-weight: 600; color: var(--green); font-family: 'DM Mono', monospace; }
+  .ph-val { font-size: 28px; font-weight: 600; color: #22c55e; font-family: 'DM Mono', monospace; }
 
-  /* ALERT */
   .alert {
-    border-radius: var(--r); padding: 12px 14px; margin-bottom: 12px;
+    border-radius: 12px; padding: 12px 14px; margin-bottom: 12px;
     display: flex; align-items: flex-start; gap: 10px;
   }
-  .alert-w { background: var(--amber-bg); border: 1px solid var(--amber-border); }
-  .alert-w .at { font-size: 13px; color: var(--amber); font-weight: 500; }
+  .alert-w { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); }
+  .alert-w .at { font-size: 13px; color: #f59e0b; font-weight: 500; }
   .alert-w .as { font-size: 12px; color: rgba(245,158,11,0.8); margin-top: 2px; }
-  .alert-g { background: var(--green-bg); border: 1px solid var(--green-border); }
-  .alert-g .at { font-size: 13px; color: var(--green); font-weight: 500; }
-  .alert-g .as { font-size: 12px; color: rgba(34,197,94,0.8); margin-top: 2px; }
 
-  /* UPCOMING HERO */
-  .upcoming-hero {
-    background: var(--bg2); border: 1.5px solid var(--green);
-    border-radius: var(--r2); padding: 14px; margin-bottom: 14px;
-  }
-  .uh-tag { font-size: 11px; color: var(--green); font-weight: 500; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
-  .uh-title { font-size: 15px; font-weight: 600; color: var(--text); }
-  .uh-date { font-size: 12px; color: var(--text2); margin-top: 2px; }
-
-  /* DIVIDER */
-  .div { height: 1px; background: var(--border); margin: 10px 0; }
-
-  /* SECTION LABEL */
-  .sec { font-size: 11px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.7px; margin: 14px 0 8px; }
-
-  /* DETAIL ROWS */
-  .drow { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .sec { font-size: 11px; font-weight: 500; color: #555; text-transform: uppercase; letter-spacing: 0.7px; margin: 14px 0 8px; }
+  .div { height: 1px; background: rgba(255,255,255,0.08); margin: 10px 0; }
+  .drow { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 13px; }
   .drow:last-child { border-bottom: none; }
-  .dk { color: var(--text2); }
-  .dv { color: var(--text); font-weight: 500; text-align: right; }
+  .dk { color: #888; }
+  .dv { color: #f0f0f0; font-weight: 500; text-align: right; }
 
-  /* PROGRESS BAR */
-  .pbar { height: 5px; background: var(--bg3); border-radius: 3px; margin-top: 6px; overflow: hidden; }
-  .pfill { height: 100%; border-radius: 3px; background: var(--green); transition: width 0.4s; }
-
-  /* AVATAR */
   .av {
     width: 38px; height: 38px; border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-size: 13px; font-weight: 600; flex-shrink: 0;
     font-family: 'DM Mono', monospace;
   }
-  .av-g { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
-  .av-b { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
-  .av-a { background: var(--amber-bg); color: var(--amber); border: 1px solid var(--amber-border); }
-  .av-p { background: rgba(168,85,247,0.1); color: #a855f7; border: 1px solid rgba(168,85,247,0.3); }
+  .av-g { background: rgba(34,197,94,0.12); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+  
+  .prow { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .prow:last-child { border-bottom: none; }
 
-  /* TAGS */
-  .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); display: inline-block; margin: 2px 2px 0 0; }
-  .tag-g { background: var(--green-bg); color: var(--green); border-color: var(--green-border); }
-  .tag-p { background: rgba(168,85,247,0.1); color: #a855f7; border-color: rgba(168,85,247,0.3); }
-  .tag-a { background: var(--amber-bg); color: var(--amber); border-color: var(--amber-border); }
-
-  /* FORMS */
-  .fg { margin-bottom: 13px; }
-  .fl { font-size: 12px; color: var(--text2); margin-bottom: 5px; display: block; }
-  .fi {
-    width: 100%; padding: 10px 12px; border-radius: var(--r);
-    border: 1px solid var(--border2); background: var(--bg2);
-    font-size: 14px; color: var(--text); font-family: 'DM Sans', sans-serif;
-    transition: border-color 0.15s;
-  }
-  .fi:focus { outline: none; border-color: var(--green); }
-  .fi-half { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 13px; }
-  .btnp {
-    width: 100%; padding: 12px; border-radius: var(--r);
-    background: var(--green); color: #000; border: none;
-    font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 4px;
-    font-family: 'DM Sans', sans-serif; transition: opacity 0.15s, transform 0.1s;
-  }
-  .btnp:active { opacity: 0.85; transform: scale(0.99); }
-  .btn-outline {
-    width: 100%; padding: 11px; border-radius: var(--r);
-    background: transparent; color: var(--green);
-    border: 1px solid var(--green-border);
-    font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 8px;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  /* FAB */
-  .fab {
-    position: fixed; bottom: 80px; right: 20px;
-    width: 50px; height: 50px; border-radius: 50%;
-    background: var(--green); border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    color: #000; font-size: 24px; z-index: 10;
-    transition: transform 0.15s, opacity 0.15s;
-    box-shadow: 0 4px 20px rgba(34,197,94,0.3);
-  }
-  .fab:active { transform: scale(0.92); }
-
-  /* TABS */
-  .tab-row { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 2px; }
-  .tab-row::-webkit-scrollbar { display: none; }
-  .tab {
-    padding: 7px 14px; border-radius: 20px; font-size: 13px;
-    border: 1px solid var(--border); background: transparent;
-    cursor: pointer; color: var(--text2); white-space: nowrap;
-    transition: all 0.15s; font-family: 'DM Sans', sans-serif;
-  }
-  .tab.on { background: var(--green); color: #000; border-color: var(--green); font-weight: 500; }
-
-  /* BAR CHART */
-  .bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 9px; }
-  .bar-label { font-size: 12px; color: var(--text2); width: 90px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .bar-track { flex: 1; height: 7px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 4px; background: var(--green); transition: width 0.6s cubic-bezier(.4,0,.2,1); }
-  .bar-val { font-size: 12px; color: var(--text); font-weight: 500; width: 56px; text-align: right; flex-shrink: 0; font-family: 'DM Mono', monospace; }
-
-  /* INSIGHT CARDS */
-  .igrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-  .icard { background: var(--bg2); border-radius: var(--r); border: 1px solid var(--border); padding: 13px; }
-  .inum { font-size: 22px; font-weight: 600; color: var(--text); font-family: 'DM Mono', monospace; }
-  .ilabel { font-size: 12px; color: var(--text2); margin-top: 3px; }
-  .itrend { font-size: 11px; margin-top: 5px; color: var(--green); }
-
-  /* LOADING */
   .loading {
     display: flex; flex-direction: column; align-items: center;
     justify-content: center; padding: 50px 20px; gap: 12px;
   }
   .spinner {
-    width: 28px; height: 28px; border: 2px solid var(--border2);
-    border-top-color: var(--green); border-radius: 50%;
+    width: 28px; height: 28px; border: 2px solid rgba(255,255,255,0.14);
+    border-top-color: #22c55e; border-radius: 50%;
     animation: spin 0.7s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-text { font-size: 13px; color: var(--text2); }
-
-  /* EMPTY STATE */
+  .loading-text { font-size: 13px; color: #888; }
   .empty { text-align: center; padding: 40px 20px; }
   .empty-icon { font-size: 36px; margin-bottom: 10px; }
-  .empty-text { font-size: 13px; color: var(--text2); }
+  .empty-text { font-size: 13px; color: #888; }
 
-  /* PARTICIPANT ROW */
-  .prow { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); }
-  .prow:last-child { border-bottom: none; }
+  .fab {
+    position: fixed; bottom: 80px; right: 20px;
+    width: 50px; height: 50px; border-radius: 50%;
+    background: #22c55e; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #000; font-size: 24px; z-index: 10;
+    box-shadow: 0 4px 20px rgba(34,197,94,0.3);
+  }
+  .fab:active { transform: scale(0.92); }
 
-  /* TOAST */
+  .fi {
+    width: 100%; padding: 10px 12px; border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.14); background: #1a1a1a;
+    font-size: 14px; color: #f0f0f0; font-family: 'DM Sans', sans-serif;
+  }
+  .fi:focus { outline: none; border-color: #22c55e; }
+  .fg { margin-bottom: 13px; }
+  .fl { font-size: 12px; color: #888; margin-bottom: 5px; display: block; }
+  .fi-half { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 13px; }
+  .btnp {
+    width: 100%; padding: 12px; border-radius: 12px;
+    background: #22c55e; color: #000; border: none;
+    font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 4px;
+  }
+  .btnp:active { opacity: 0.85; }
+
   .toast {
     position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: var(--bg3); border: 1px solid var(--border2);
-    color: var(--text); font-size: 13px; padding: 10px 18px;
+    background: #242424; border: 1px solid rgba(255,255,255,0.14);
+    color: #f0f0f0; font-size: 13px; padding: 10px 18px;
     border-radius: 20px; z-index: 200; opacity: 0;
-    transition: all 0.25s; pointer-events: none; white-space: nowrap;
+    transition: all 0.25s; pointer-events: none;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- PIN SCREEN -->
 <div id="pin-screen">
   <div class="pin-logo">🥁</div>
   <div class="pin-title">Handpan with Arpit</div>
@@ -342,10 +254,7 @@
   <div id="pin-error" class="pin-error" style="display:none">Wrong PIN. Try again.</div>
 </div>
 
-<!-- MAIN APP -->
 <div id="app" style="display:none">
-
-  <!-- HOME -->
   <div class="screen active" id="s-home">
     <div class="topbar">
       <div class="topbar-info">
@@ -354,9 +263,7 @@
       </div>
       <button class="topbar-action" onclick="go('s-settings')">⚙️</button>
     </div>
-    <div class="body" id="home-body">
-      <div class="loading"><div class="spinner"></div><div class="loading-text">Loading your data...</div></div>
-    </div>
+    <div class="body" id="home-body"><div class="loading"><div class="spinner"></div><div class="loading-text">Loading your data...</div></div></div>
     <button class="fab" onclick="go('s-add-ws')">＋</button>
     <nav class="navbar">
       <button class="ni on" onclick="go('s-home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
@@ -367,15 +274,9 @@
     </nav>
   </div>
 
-  <!-- WORKSHOPS -->
   <div class="screen" id="s-workshops">
-    <div class="topbar">
-      <div class="topbar-title">Workshops</div>
-      <button class="topbar-action" onclick="go('s-add-ws')">＋</button>
-    </div>
-    <div class="body" id="workshops-body">
-      <div class="loading"><div class="spinner"></div><div class="loading-text">Loading workshops...</div></div>
-    </div>
+    <div class="topbar"><div class="topbar-title">Workshops</div><button class="topbar-action" onclick="go('s-add-ws')">＋</button></div>
+    <div class="body" id="workshops-body"><div class="loading"><div class="spinner"></div><div class="loading-text">Loading workshops...</div></div></div>
     <button class="fab" onclick="go('s-add-ws')">＋</button>
     <nav class="navbar">
       <button class="ni" onclick="go('s-home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
@@ -386,18 +287,9 @@
     </nav>
   </div>
 
-  <!-- WORKSHOP DETAIL -->
   <div class="screen" id="s-ws-detail">
-    <div class="topbar">
-      <button class="topbar-back" onclick="back()">←</button>
-      <div class="topbar-info">
-        <div class="topbar-title" id="wsd-title">Workshop</div>
-        <div class="topbar-sub" id="wsd-date"></div>
-      </div>
-    </div>
-    <div class="body" id="wsd-body">
-      <div class="loading"><div class="spinner"></div></div>
-    </div>
+    <div class="topbar"><button class="topbar-back" onclick="back()">←</button><div class="topbar-info"><div class="topbar-title" id="wsd-title">Workshop</div><div class="topbar-sub" id="wsd-date"></div></div></div>
+    <div class="body" id="wsd-body"><div class="loading"><div class="spinner"></div></div></div>
     <nav class="navbar">
       <button class="ni" onclick="go('s-home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
       <button class="ni on" onclick="go('s-workshops')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Workshops</button>
@@ -407,30 +299,45 @@
     </nav>
   </div>
 
-  <!-- ADD WORKSHOP -->
   <div class="screen" id="s-add-ws">
-    <div class="topbar">
-      <button class="topbar-back" onclick="back()">←</button>
-      <div class="topbar-title">New workshop</div>
-    </div>
+    <div class="topbar"><button class="topbar-back" onclick="back()">←</button><div class="topbar-title">New workshop</div></div>
     <div class="body">
       <div class="fg"><label class="fl">Venue / location</label><input class="fi" id="ws-venue" type="text" placeholder="e.g. Creative Bloom Koramangala"></div>
       <div class="fg"><label class="fl">Date</label><input class="fi" id="ws-date" type="date"></div>
-      <div class="fi-half">
-        <div><label class="fl">BMS price/head (₹)</label><input class="fi" id="ws-bms" type="number" placeholder="1799"></div>
-        <div><label class="fl">UPI price/head (₹)</label><input class="fi" id="ws-upi" type="number" placeholder="1799"></div>
-      </div>
+      <div class="fi-half"><div><label class="fl">BMS price/head (₹)</label><input class="fi" id="ws-bms" type="number" placeholder="1799"></div><div><label class="fl">UPI price/head (₹)</label><input class="fi" id="ws-upi" type="number" placeholder="1799"></div></div>
       <div class="sec">Expenses</div>
-      <div class="fi-half">
-        <div><label class="fl">Venue rent (₹)</label><input class="fi" id="ws-rent" type="number" placeholder="3000"></div>
-        <div><label class="fl">Handpan rental (₹)</label><input class="fi" id="ws-hp" type="number" placeholder="5000"></div>
-        <div><label class="fl">Porter charges (₹)</label><input class="fi" id="ws-porter" type="number" placeholder="1500"></div>
-        <div><label class="fl">Snacks + misc (₹)</label><input class="fi" id="ws-snacks" type="number" placeholder="200"></div>
-      </div>
+      <div class="fi-half"><div><label class="fl">Venue rent (₹)</label><input class="fi" id="ws-rent" type="number" placeholder="3000"></div><div><label class="fl">Handpan rental (₹)</label><input class="fi" id="ws-hp" type="number" placeholder="5000"></div><div><label class="fl">Porter charges (₹)</label><input class="fi" id="ws-porter" type="number" placeholder="1500"></div><div><label class="fl">Snacks + misc (₹)</label><input class="fi" id="ws-snacks" type="number" placeholder="200"></div></div>
       <div class="fg"><label class="fl">Notes (optional)</label><input class="fi" id="ws-notes" type="text" placeholder="Anything to remember"></div>
       <button class="btnp" onclick="saveWorkshop()">Save workshop</button>
     </div>
   </div>
 
-  <!-- PEOPLE -->
-  <div class="screen" id="s-
+  <div class="screen" id="s-people">
+    <div class="topbar"><div class="topbar-title">People</div><button class="topbar-action" onclick="go('s-add-person')">＋</button></div>
+    <div class="body" id="people-body"><div class="loading"><div class="spinner"></div><div class="loading-text">Loading people...</div></div></div>
+    <button class="fab" onclick="go('s-add-person')">＋</button>
+    <nav class="navbar">
+      <button class="ni" onclick="go('s-home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
+      <button class="ni" onclick="go('s-workshops')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Workshops</button>
+      <button class="ni on" onclick="go('s-people')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>People</button>
+      <button class="ni" onclick="go('s-finance')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Finances</button>
+      <button class="ni" onclick="go('s-insights')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Insights</button>
+    </nav>
+  </div>
+
+  <div class="screen" id="s-person-detail">
+    <div class="topbar"><button class="topbar-back" onclick="back()">←</button><div class="topbar-info"><div class="topbar-title" id="pd-name">Person</div><div class="topbar-sub" id="pd-sub"></div></div></div>
+    <div class="body" id="pd-body"></div>
+    <nav class="navbar">
+      <button class="ni" onclick="go('s-home')"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
+      <button class="ni" onclick="go('s-workshops')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Workshops</button>
+      <button class="ni on" onclick="go('s-people')"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>People</button>
+      <button class="ni" onclick="go('s-finance')"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Finances</button>
+      <button class="ni" onclick="go('s-insights')"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Insights</button>
+    </nav>
+  </div>
+
+  <div class="screen" id="s-add-person">
+    <div class="topbar"><button class="topbar-back" onclick="back()">←</button><div class="topbar-title">Add person</div></div>
+    <div class="body">
+      <div class="fg"><label class="fl">Full name</label><input class="fi" id="p-name" type="
